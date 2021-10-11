@@ -13,12 +13,11 @@ const prodConfig = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: 'marketing', // global variable name for consuming project
-      filename: 'remoteEntry.js',
-      exposes: {
-        './MarketingApp': './src/bootstrap',
+      name: 'host',
+      remotes: {
+        marketing: `marketing@${domain}/marketing/remoteEntry.js`,
       },
-      shared: dependencies, // get sharing dependencies from package.json , not ideal if some exact version usage
+      shared: dependencies,
     }),
   ],
 }
